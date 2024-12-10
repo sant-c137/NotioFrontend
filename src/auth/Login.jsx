@@ -1,4 +1,6 @@
 import { useState } from 'react';
+import { useAuth } from '../auth/AuthProvider';
+import { Navigate } from 'react-router-dom';
 import axios from 'axios';
 import './Login.css';
 
@@ -6,6 +8,7 @@ const Login = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
+  const { isAuthenticated, updateAuthStatus } = useAuth();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -17,7 +20,7 @@ const Login = () => {
           password,
         },
         {
-          withCredentials: true, // This is crucial for handling cookies
+          withCredentials: true,
           headers: {
             'Content-Type': 'application/json',
           },
@@ -25,8 +28,7 @@ const Login = () => {
       );
 
       if (response.status === 200) {
-        alert('Login successful');
-        // You might want to redirect or update app state here
+        updateAuthStatus(true);
       }
     } catch (err) {
       setError('Invalid username or password');
@@ -34,7 +36,9 @@ const Login = () => {
     }
   };
 
-  return (
+  return isAuthenticated ? (
+    <Navigate to="/notes" replace />
+  ) : (
     <div className="login-container">
       <form onSubmit={handleSubmit} className="login-form">
         <h2 className="login-title">Login</h2>
