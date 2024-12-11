@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import Button from './components/Button';
 import './EditNote.css';
 
 const EditNote = ({ note, onEditSuccess }) => {
@@ -82,9 +83,13 @@ const EditNote = ({ note, onEditSuccess }) => {
           onChange={(e) => setStatus(e.target.value)}
         />
       </div>
-      <button type="submit" disabled={isLoading}>
-        {isLoading ? 'Saving...' : 'Save Changes'}
-      </button>
+      <Button
+        type="submit"
+        disabled={isLoading}
+        Text={isLoading ? 'Saving...' : 'Save Changes'}
+        className="cancel-btn"
+      />
+
       {error && <p style={{ color: 'red' }}>{error}</p>}
     </form>
   );

@@ -1,4 +1,6 @@
 import { useState } from 'react';
+import Button from './components/Button';
+import './ShareNote.css';
 
 function ShareNote({ noteId, onShareSuccess }) {
   const [email, setEmail] = useState('');
@@ -57,9 +59,9 @@ function ShareNote({ noteId, onShareSuccess }) {
   };
 
   return (
-    <div>
+    <div className="share-container">
       <h4>Share Note</h4>
-      <form onSubmit={handleShare}>
+      <form onSubmit={handleShare} className="share-container">
         <input
           type="email"
           placeholder="Enter user email"
@@ -74,7 +76,7 @@ function ShareNote({ noteId, onShareSuccess }) {
           <option value="view">View</option>
           <option value="edit">Edit</option>
         </select>
-        <button type="submit">Share</button>
+        <Button type="submit" Text="Share" className="cancel-btn" />
       </form>
       {message && <p style={{ color: 'green' }}>{message}</p>}
       {error && <p style={{ color: 'red' }}>{error}</p>}

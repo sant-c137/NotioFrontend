@@ -1,3 +1,5 @@
+import './CreateNote.css';
+
 import { useState } from 'react';
 const CreateNote = () => {
   const [title, setTitle] = useState('');

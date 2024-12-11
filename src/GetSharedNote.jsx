@@ -50,9 +50,14 @@ function GetSharedNotes() {
   }, []);
 
   return (
-    <div>
-      <h1>Shared Notes</h1>
-      <button onClick={fetchSharedNotes}>Fetch Shared Notes</button>
+    <div className="shared-note-container">
+      <div className="title-reload">
+        <h2>Shared Notes</h2>
+        <img src="reload.svg" alt="reload icon" onClick={fetchSharedNotes} />
+      </div>
+      <br />
+      <br />
+
       {loading && <p>Loading...</p>}
       {error && <p style={{ color: 'red' }}>{error}</p>}
       {sharedNotes.length === 0 && !loading && (
@@ -60,14 +65,7 @@ function GetSharedNotes() {
       )}
 
       {sharedNotes.map((sharedNote) => (
-        <div
-          key={sharedNote.note_id}
-          style={{
-            border: '1px solid #ddd',
-            padding: '10px',
-            marginBottom: '10px',
-          }}
-        >
+        <div key={sharedNote.note_id} className="note">
           <h3>{sharedNote.title}</h3>
           <p>{sharedNote.content}</p>
           <p>

@@ -50,7 +50,7 @@ export const AuthProvider = ({ children }) => {
   // Comprobar el estado de autenticación al montar el componente
   useEffect(() => {
     checkAuthStatus();
-  }, []);
+  });
 
   return (
     <AuthContext.Provider value={{ isAuthenticated, updateAuthStatus }}>

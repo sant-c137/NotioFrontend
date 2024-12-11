@@ -1,0 +1,13 @@
+header {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  padding: 1rem;
+  width: 100%;
+  background-color: var(--black);
+  color: var(--white);
+}
+
+span {
+  font-size: 1rem;
+}

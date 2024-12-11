@@ -1,0 +1,42 @@
+.shared-note-container {
+  margin: 2rem 4rem 2rem 4rem;
+
+  & img {
+    margin-left: 0.5rem;
+    width: 1.5rem;
+    &:hover {
+      cursor: pointer;
+    }
+  }
+}
+
+.title-reload {
+  display: flex;
+  align-items: center;
+}
+
+.notes {
+  display: flex;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.note {
+  box-shadow: 0 4px 6px rgba(255, 255, 255, 0.292);
+  overflow: hidden;
+  max-width: 18rem;
+  max-height: 30rem;
+  padding: 1rem;
+  border-radius: 1rem;
+  flex-grow: 1;
+
+  & h3 {
+    margin-bottom: 2rem;
+    font-family: 'Virgil', sans-serif;
+  }
+
+  & p {
+    text-wrap: pretty;
+    font-family: 'Virgil', sans-serif;
+  }
+}

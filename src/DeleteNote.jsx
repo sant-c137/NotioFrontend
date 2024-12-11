@@ -1,10 +1,10 @@
 import { useState } from 'react';
+import Button from './components/Button';
 import './DeleteNote.css';
 
-const DeleteNote = ({ noteId, onDeleteSuccess }) => {
+const DeleteNote = ({ noteId, onDeleteSuccess, onCancel }) => {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState('');
-  const [showConfirm, setShowConfirm] = useState(false);
 
   const getCookie = (name) => {
     const match = document.cookie.match(
@@ -34,8 +34,8 @@ const DeleteNote = ({ noteId, onDeleteSuccess }) => {
 
       if (response.ok) {
         const data = await response.json();
-        onDeleteSuccess(); // Callback para actualizar la UI después de eliminar la nota
-        alert(data.message); // Muestra el mensaje de éxito
+        onDeleteSuccess(); // Actualiza la UI y cierra la modal tras eliminar la nota
+        alert(data.message); // Mensaje de éxito
       } else {
         const errorData = await response.json();
         setError(errorData.error || 'Failed to delete the note.');
@@ -48,36 +48,26 @@ const DeleteNote = ({ noteId, onDeleteSuccess }) => {
     }
   };
 
-  const handleConfirmDelete = () => {
-    setShowConfirm(true); // Muestra el mensaje de confirmación
-  };
-
-  const handleCancelDelete = () => {
-    setShowConfirm(false); // Cierra el mensaje de confirmación
-  };
-
   return (
     <div className="delete-note-container">
-      {showConfirm ? (
-        <div className="confirm-delete">
-          <p>Are you sure you want to delete this note?</p>
-          <button
-            onClick={handleDelete}
-            disabled={isLoading}
-            className="confirm-button"
-          >
-            {isLoading ? 'Deleting...' : 'Yes, Delete'}
-          </button>
-          <button onClick={handleCancelDelete} className="cancel-button">
-            Cancel
-          </button>
-          {error && <p className="error-message">{error}</p>}
-        </div>
-      ) : (
-        <button onClick={handleConfirmDelete} className="delete-button">
-          Delete Note
-        </button>
-      )}
+      <div className="confirm-delete">
+        <p>Are you sure you want to delete this note?</p>
+
+        <Button
+          onClick={handleDelete}
+          disabled={isLoading}
+          Text={isLoading ? 'Deleting...' : 'Yes, Delete'}
+          className="confirm-btn"
+        />
+
+        <Button
+          onClick={onCancel} // Llamamos a `onCancel` para cerrar sin eliminar
+          className="cancel-btn"
+          Text="Cancel"
+        />
+
+        {error && <p className="error-message">{error}</p>}
+      </div>
     </div>
   );
 };

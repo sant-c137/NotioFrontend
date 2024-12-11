@@ -1,4 +1,5 @@
 import { useAuth } from '../auth/AuthProvider';
+import Button from '../components/Button';
 import './Logout.css';
 
 const Logout = () => {
@@ -35,11 +36,7 @@ const Logout = () => {
     }
   };
 
-  return (
-    <button onClick={handleLogout} className="logout-button">
-      Logout
-    </button>
-  );
+  return <Button onClick={handleLogout} Text="Logout" className="logout-btn" />;
 };
 
 export default Logout;
