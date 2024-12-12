@@ -4,12 +4,24 @@ import './Header.css';
 
 const Header = () => {
   const [username, setUserName] = useState('');
+  const [greeting, setGreeting] = useState('');
 
   const getCookie = (name) => {
     const match = document.cookie.match(
       new RegExp('(^| )' + name + '=([^;]+)')
     );
     return match ? match[2] : null;
+  };
+
+  const determineGreeting = () => {
+    const currentHour = new Date().getHours();
+    if (currentHour < 12) {
+      return 'Good morning';
+    } else if (currentHour < 18) {
+      return 'Good afternoon';
+    } else {
+      return 'Good evening';
+    }
   };
 
   const checkAuthStatus = async () => {
@@ -26,7 +38,6 @@ const Header = () => {
       });
       if (response.ok) {
         const data = await response.json();
-        console.log(data.username);
         setUserName(data.username);
       }
     } catch (err) {
@@ -36,13 +47,16 @@ const Header = () => {
 
   useEffect(() => {
     checkAuthStatus();
-  });
+    setGreeting(determineGreeting());
+  }, []);
 
   return (
     <header>
       <h1>Notio</h1>
 
-      <h2>Welcome back, {username}</h2>
+      <h2>
+        {greeting}, {username.toUpperCase()}
+      </h2>
 
       <Logout />
     </header>

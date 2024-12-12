@@ -4,8 +4,13 @@
   & img {
     margin-left: 0.5rem;
     width: 1.5rem;
+    transition: all 0.3s ease;
+    border-radius: 100%;
+    padding: 0.1rem;
     &:hover {
       cursor: pointer;
+      background-color: #60606038;
+      transform: scale(1.05);
     }
   }
 }
@@ -13,6 +18,7 @@
 .title-reload {
   display: flex;
   align-items: center;
+  margin-bottom: 1rem;
 }
 
 .notes {

@@ -2,13 +2,20 @@
   min-height: 100dvh;
   width: 100%;
   display: flex;
-  justify-content: center;
+  justify-content: space-evenly;
   align-items: center;
+
   background: radial-gradient(
     125% 125% at 50% 10%,
     var(--black) 40%,
     var(--sky-blue) 400%
   );
+
+  & h2 {
+    color: var(--white);
+    text-align: center;
+    font-size: 3rem;
+  }
 }
 
 .tabs {

@@ -1,14 +1,12 @@
 import { useContext, createContext, useState, useEffect } from 'react';
 import { PropTypes } from 'prop-types';
 
-// Crear el contexto
 const AuthContext = createContext({
   isAuthenticated: false,
-  updateAuthStatus: () => {}, // Función que se implementará para actualizar el estado de autenticación
-  logout: () => {}, // Función para cerrar sesión
+  updateAuthStatus: () => {},
+  logout: () => {},
 });
 
-// Crear el proveedor
 export const AuthProvider = ({ children }) => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
 
@@ -42,12 +40,10 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
-  // Función para actualizar el estado de autenticación
   const updateAuthStatus = (status) => {
     setIsAuthenticated(status);
   };
 
-  // Comprobar el estado de autenticación al montar el componente
   useEffect(() => {
     checkAuthStatus();
   });

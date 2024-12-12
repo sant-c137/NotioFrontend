@@ -1,0 +1,38 @@
+@keyframes smooth-dots {
+  0% {
+    content: 'Loading';
+  }
+  25% {
+    content: 'Loading.';
+  }
+  50% {
+    content: 'Loading..';
+  }
+  75% {
+    content: 'Loading...';
+  }
+  100% {
+    content: 'Loading';
+  }
+}
+
+.loading-container {
+  height: 100dvh;
+  background: radial-gradient(
+    125% 125% at 50% 10%,
+    var(--black) 40%,
+    var(--sky-blue) 400%
+  );
+  color: var(--white);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 2rem;
+}
+
+.loading-container h1::after {
+  content: 'Loading';
+  display: inline-block;
+  animation: smooth-dots 3s linear infinite;
+  transition: all 3s ease-in-out;
+}

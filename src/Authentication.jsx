@@ -8,6 +8,7 @@ const Authentication = () => {
 
   return (
     <div className="container">
+      <h2>Welcome to Notio</h2>
       <div className="tabs">
         <input
           type="radio"

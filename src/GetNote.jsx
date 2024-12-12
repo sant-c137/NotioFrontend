@@ -37,7 +37,12 @@ function GetNote() {
       }
 
       const data = await response.json();
-      setNotes(data.notes);
+
+      const processedNotes = data.notes.map((note) => ({
+        ...note,
+        tags: note.tags || [],
+      }));
+      setNotes(processedNotes);
     } catch (err) {
       console.error('Error:', err);
       setError(`Failed to load notes: ${err.message}`);
@@ -67,7 +72,12 @@ function GetNote() {
       }
 
       const data = await response.json();
-      setSharedNotes(data.shared_notes);
+
+      const processedSharedNotes = data.shared_notes.map((note) => ({
+        ...note,
+        tags: note.tags || [],
+      }));
+      setSharedNotes(processedSharedNotes);
     } catch (err) {
       console.error('Error:', err);
       setError(`Failed to load shared notes: ${err.message}`);
@@ -128,10 +138,10 @@ function GetNote() {
             <DeleteNote
               noteId={note.note_id}
               onDeleteSuccess={() => {
-                fetchNotes(); // Refresca las notas
-                setModalVisible(false); // Cierra la modal
+                fetchNotes();
+                setModalVisible(false);
               }}
-              onCancel={() => setModalVisible(false)} // Cierra la modal sin hacer nada
+              onCancel={() => setModalVisible(false)}
             />
           )}
           {action === 'send' && <ShareNote noteId={note.note_id} />}
@@ -145,6 +155,11 @@ function GetNote() {
                 <strong>Last Modified:</strong>{' '}
                 {new Date(note.last_modification).toLocaleString()}
               </p>
+              {note.tags && note.tags.length > 0 && (
+                <p>
+                  <strong>Tags:</strong> {note.tags.join(', ')}
+                </p>
+              )}
             </div>
           )}
         </div>
@@ -173,6 +188,16 @@ function GetNote() {
             <div className="note" key={note.note_id}>
               <h3>{note.title}</h3>
               <p>{note.content}</p>
+
+              {note.tags && note.tags.length > 0 && (
+                <div className="tags">
+                  {note.tags.map((tag, index) => (
+                    <span key={index} className="tag">
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+              )}
 
               <div className="options">
                 <img

@@ -1,8 +1,8 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import Button from './components/Button';
 import './ShareNote.css';
 
-function ShareNote({ noteId, onShareSuccess }) {
+function ShareNote({ noteId, onShareSuccess = () => {} }) {
   const [email, setEmail] = useState('');
   const [permissionType, setPermissionType] = useState('view');
   const [message, setMessage] = useState('');
@@ -36,14 +36,6 @@ function ShareNote({ noteId, onShareSuccess }) {
           permission: permissionType,
         }),
       });
-
-      console.log(
-        JSON.stringify({
-          note_id: noteId,
-          shared_user_email: email,
-          permission: permissionType,
-        })
-      );
 
       if (response.ok) {
         setMessage('Note shared successfully!');

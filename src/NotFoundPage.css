@@ -1,0 +1,20 @@
+.not-found-page {
+  height: 100dvh;
+  background: radial-gradient(
+    125% 125% at 50% 10%,
+    var(--black) 40%,
+    var(--sky-blue) 400%
+  );
+  color: var(--white);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-size: 2rem;
+  gap: 2rem;
+}
+
+.not-found-page-btn {
+  padding: 0 3rem;
+  text-decoration: none;
+}

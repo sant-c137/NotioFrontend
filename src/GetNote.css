@@ -4,8 +4,13 @@
   & img {
     margin-left: 0.5rem;
     width: 1.5rem;
+    transition: all 0.3s ease;
+    border-radius: 100%;
+    padding: 0.1rem;
     &:hover {
       cursor: pointer;
+      background-color: #60606038;
+      transform: scale(1.05);
     }
   }
 }
@@ -22,12 +27,15 @@
 }
 
 .note {
-  box-shadow: 0 4px 6px #00000046;
+  /* box-shadow: 0 4px 6px #00000046; */
   border: 2px solid var(--black);
   overflow: hidden;
+
   max-width: 18rem;
   min-width: 18rem;
   max-height: 30rem;
+  min-height: 15rem;
+
   padding: 1rem;
   border-radius: 1rem;
   flex-grow: 1;
@@ -43,7 +51,27 @@
   & p {
     text-wrap: pretty;
     font-family: 'Virgil', sans-serif;
+    max-height: 24rem;
+    overflow: scroll;
+    scrollbar-width: none;
+    overflow-y: auto; /* Muestra scroll solo en vertical si es necesario */
+    overflow-x: hidden; /* Oculta el scroll horizontal */
   }
+}
+
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
+
+.tag {
+  border: 2px solid var(--sky-blue);
+  font-size: 0.8rem;
+  padding: 0.2rem 0.5rem;
+  border-radius: 1rem;
+  color: var(--sky-blue);
 }
 
 .options {

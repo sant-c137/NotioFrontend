@@ -7,3 +7,25 @@
   border-radius: 1rem;
   flex-grow: 1;
 }
+
+.create-note {
+  display: flex;
+  justify-content: center !important;
+  align-items: center !important;
+
+  gap: 2rem;
+
+  & img {
+    width: 4.3rem !important;
+    height: 4.3rem !important;
+    padding: 0.3rem !important;
+    transition: all 0.3s ease;
+    border-radius: 100%;
+    padding: 0.5rem;
+
+    &:hover {
+      background-color: #60606038;
+      transform: scale(1.05);
+    }
+  }
+}

@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import Button from './components/Button';
 import './EditNote.css';
 
-const EditNote = ({ note, onEditSuccess }) => {
+const EditSharedNote = ({ note, onEditSuccess }) => {
   const [title, setTitle] = useState(note.title);
   const [content, setContent] = useState(note.content);
   const [tags, setTags] = useState(note.tags || []);
@@ -23,8 +23,9 @@ const EditNote = ({ note, onEditSuccess }) => {
 
     try {
       const csrfToken = getCookie('csrftoken');
+
       const response = await fetch(
-        `http://localhost:8000/api/edit_note/${note.note_id}/`,
+        `http://localhost:8000/api/edit_shared_note/${note.shared_note_id}/`,
         {
           method: 'PUT',
           headers: {
@@ -35,7 +36,7 @@ const EditNote = ({ note, onEditSuccess }) => {
           body: JSON.stringify({
             title,
             content,
-            tags: tags,
+            tags,
           }),
         }
       );
@@ -43,6 +44,7 @@ const EditNote = ({ note, onEditSuccess }) => {
       if (response.ok) {
         const data = await response.json();
         onEditSuccess();
+        alert(data.message);
       } else {
         const errorData = await response.json();
         setError(errorData.error || 'Failed to update the note.');
@@ -62,7 +64,7 @@ const EditNote = ({ note, onEditSuccess }) => {
 
   return (
     <form onSubmit={handleEdit} className="edit-note-form">
-      <h2>Edit Note</h2>
+      <h2>Edit Shared Note</h2>
       <div>
         <label htmlFor="edit-title">Title</label>
         <input
@@ -104,4 +106,4 @@ const EditNote = ({ note, onEditSuccess }) => {
   );
 };
 
-export default EditNote;
+export default EditSharedNote;

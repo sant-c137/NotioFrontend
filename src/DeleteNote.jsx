@@ -34,8 +34,7 @@ const DeleteNote = ({ noteId, onDeleteSuccess, onCancel }) => {
 
       if (response.ok) {
         const data = await response.json();
-        onDeleteSuccess(); // Actualiza la UI y cierra la modal tras eliminar la nota
-        alert(data.message); // Mensaje de éxito
+        onDeleteSuccess();
       } else {
         const errorData = await response.json();
         setError(errorData.error || 'Failed to delete the note.');
@@ -60,11 +59,7 @@ const DeleteNote = ({ noteId, onDeleteSuccess, onCancel }) => {
           className="confirm-btn"
         />
 
-        <Button
-          onClick={onCancel} // Llamamos a `onCancel` para cerrar sin eliminar
-          className="cancel-btn"
-          Text="Cancel"
-        />
+        <Button onClick={onCancel} className="cancel-btn" Text="Cancel" />
 
         {error && <p className="error-message">{error}</p>}
       </div>
