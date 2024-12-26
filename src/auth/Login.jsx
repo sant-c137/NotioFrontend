@@ -3,6 +3,7 @@ import { useAuth } from '../auth/AuthProvider';
 import { Navigate } from 'react-router-dom';
 import axios from 'axios';
 import Button from '../components/Button';
+import GoogleOauthLogin from './GoogleOauthLogin';
 import './Login.css';
 
 const Login = () => {
@@ -40,26 +41,29 @@ const Login = () => {
   return isAuthenticated ? (
     <Navigate to="/notes" replace />
   ) : (
-    <form onSubmit={handleSubmit} className="login-form">
-      <h1 className="login-title">Login</h1>
-      <input
-        type="text"
-        placeholder="Username"
-        value={username}
-        onChange={(e) => setUsername(e.target.value)}
-        className="login-input"
-      />
+    <>
+      <form onSubmit={handleSubmit} className="login-form">
+        <h1 className="login-title">Login</h1>
+        <input
+          type="text"
+          placeholder="Username"
+          value={username}
+          onChange={(e) => setUsername(e.target.value)}
+          className="login-input"
+        />
 
-      <input
-        type="password"
-        placeholder="Password"
-        value={password}
-        onChange={(e) => setPassword(e.target.value)}
-        className="login-input"
-      />
-      <Button type="submit" Text="Login" />
-      {error && <p className="error-message">{error}</p>}
-    </form>
+        <input
+          type="password"
+          placeholder="Password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          className="login-input"
+        />
+        <Button type="submit" Text="Login" />
+        {error && <p className="error-message">{error}</p>}
+      </form>
+      <GoogleOauthLogin />
+    </>
   );
 };
 
